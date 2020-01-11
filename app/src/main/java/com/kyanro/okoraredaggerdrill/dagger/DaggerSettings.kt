@@ -23,14 +23,19 @@ class LuckyNumberModule(private val luckyNumber: Int) {
     @Named("lucky number text")
     fun provideLuckyNumberText() =
         "今日のラッキーナンバー: $luckyNumber"
+
+    @AppScope
+    @Provides
+    @Named("lucky number")
+    fun provideLuckyNumber() = luckyNumber
 }
 
 @Module
-class FortuneModule(private val luckyNumber: Int) {
+class FortuneModule {
     @AppScope
     @Provides
     @Named("fortune text")
-    fun provideFortuneText(): String {
+    fun provideFortuneText(@Named("lucky number") luckyNumber: Int): String {
         val fortune = when (luckyNumber) {
             in 0..99 -> "アゲアゲ！！！"
             in 100..499 -> "アゲ！！"
