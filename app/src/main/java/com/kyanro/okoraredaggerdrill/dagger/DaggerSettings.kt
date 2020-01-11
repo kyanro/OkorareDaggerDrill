@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 import javax.inject.Scope
-import kotlin.random.Random
 
 @AppScope
 @Component(modules = [LuckyNumberModule::class])
@@ -15,12 +14,12 @@ interface AppComponent {
 }
 
 @Module
-class LuckyNumberModule {
+class LuckyNumberModule(private val luckyNumber: Int) {
     @AppScope
     @Provides
     @Named("lucky number text")
     fun provideLuckyNumberText() =
-        "今日のラッキーナンバー: ${Random.nextInt(1, 1000)}"
+        "今日のラッキーナンバー: $luckyNumber"
 }
 
 @Scope
