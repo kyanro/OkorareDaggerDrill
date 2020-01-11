@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.kyanro.okoraredaggerdrill.dagger.AppComponent
 import com.kyanro.okoraredaggerdrill.dagger.DaggerAppComponent
+import com.kyanro.okoraredaggerdrill.dagger.FortuneModule
 import com.kyanro.okoraredaggerdrill.dagger.LuckyNumberModule
 
 class MyApp : Application() {
@@ -12,8 +13,10 @@ class MyApp : Application() {
         super.onCreate()
         val luckyNumber = 777
         val luckyNumberModule = LuckyNumberModule(luckyNumber)
+        val fortuneModule = FortuneModule(luckyNumber)
         appComponent = DaggerAppComponent.builder()
             .luckyNumberModule(luckyNumberModule)
+            .fortuneModule(fortuneModule)
             .build()
 
         Log.d("lucky-log", appComponent.getLuckyNumberText())
