@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.kyanro.okoraredaggerdrill.MyApp
 import com.kyanro.okoraredaggerdrill.R
 import com.kyanro.okoraredaggerdrill.databinding.FragmentHomeSecondBinding
 
@@ -22,7 +23,11 @@ class HomeSecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textviewHomeSecond.text = getString(R.string.hello_home_second, args.myArg)
+
+        val appComponent = (requireActivity().applicationContext as MyApp).appComponent
+        val fortuneText = appComponent.getFortuneText()
+
+        binding.textviewHomeSecond.text = fortuneText
         binding.buttonHomeSecond.setOnClickListener {
             findNavController().navigate(R.id.action_HomeSecondFragment_to_HomeFragment)
         }
