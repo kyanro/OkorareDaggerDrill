@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.kyanro.okoraredaggerdrill.MyApp
-import com.kyanro.okoraredaggerdrill.R
 import com.kyanro.okoraredaggerdrill.dagger.DaggerAppComponent
 import com.kyanro.okoraredaggerdrill.databinding.FragmentHomeBinding
 
@@ -23,9 +21,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.textHome.text = it
-        })
 
         val appComponent = DaggerAppComponent.create()
         Log.d("lucky-log", appComponent.getLuckyNumberText())
@@ -36,6 +31,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val appComponent = (requireActivity().applicationContext as MyApp).appComponent
+        val homeText = appComponent.getLuckyNumberText()
+        binding.textHome.text = homeText
+
         binding.buttonHome.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToHomeSecondFragment("From HomeFragment")
             NavHostFragment.findNavController(this@HomeFragment).navigate(action)
