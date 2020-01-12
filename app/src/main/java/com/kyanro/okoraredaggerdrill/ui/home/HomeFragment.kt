@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val appComponent = (requireActivity().applicationContext as MyApp).appComponent
-        val homeText = appComponent.getLuckyNumberText()
+        val homeText = appComponent.getLuckyNumberTextCreator().luckyNumberText()
         binding.textHome.text = homeText
 
         binding.buttonHome.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.kyanro.okoraredaggerdrill.dagger
 
+import com.kyanro.okoraredaggerdrill.domain.luckynumber.LuckyNumberTextCreator
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -9,8 +10,7 @@ import javax.inject.Scope
 @AppScope
 @Component(modules = [LuckyNumberModule::class, FortuneModule::class])
 interface AppComponent {
-    @NamedLuckyNumberText
-    fun getLuckyNumberText(): String
+    fun getLuckyNumberTextCreator(): LuckyNumberTextCreator
 
     @NamedFortuneText
     fun getFortuneText(): String
@@ -20,9 +20,8 @@ interface AppComponent {
 class LuckyNumberModule(private val luckyNumber: Int) {
     @AppScope
     @Provides
-    @NamedLuckyNumberText
-    fun provideLuckyNumberText() =
-        "今日のラッキーナンバー: $luckyNumber"
+    fun provideLuckyNumberTextCreator() =
+        LuckyNumberTextCreator(luckyNumber)
 
     @AppScope
     @Provides
@@ -47,9 +46,6 @@ class FortuneModule {
 
 @Scope
 annotation class AppScope
-
-@Qualifier
-annotation class NamedLuckyNumberText
 
 @Qualifier
 annotation class NamedFortuneText
