@@ -3,16 +3,16 @@ package com.kyanro.okoraredaggerdrill.dagger
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
+import javax.inject.Qualifier
 import javax.inject.Scope
 
 @AppScope
 @Component(modules = [LuckyNumberModule::class, FortuneModule::class])
 interface AppComponent {
-    @Named("lucky number text")
+    @NamedLuckyNumberText
     fun getLuckyNumberText(): String
 
-    @Named("fortune text")
+    @NamedFortuneText
     fun getFortuneText(): String
 }
 
@@ -20,13 +20,13 @@ interface AppComponent {
 class LuckyNumberModule(private val luckyNumber: Int) {
     @AppScope
     @Provides
-    @Named("lucky number text")
+    @NamedLuckyNumberText
     fun provideLuckyNumberText() =
         "今日のラッキーナンバー: $luckyNumber"
 
     @AppScope
     @Provides
-    @Named("lucky number")
+    @NamedLuckyNumber
     fun provideLuckyNumber() = luckyNumber
 }
 
@@ -34,8 +34,8 @@ class LuckyNumberModule(private val luckyNumber: Int) {
 class FortuneModule {
     @AppScope
     @Provides
-    @Named("fortune text")
-    fun provideFortuneText(@Named("lucky number") luckyNumber: Int): String {
+    @NamedFortuneText
+    fun provideFortuneText(@NamedLuckyNumber luckyNumber: Int): String {
         val fortune = when (luckyNumber) {
             in 0..99 -> "アゲアゲ！！！"
             in 100..499 -> "アゲ！！"
@@ -48,3 +48,12 @@ class FortuneModule {
 
 @Scope
 annotation class AppScope
+
+@Qualifier
+annotation class NamedLuckyNumberText
+
+@Qualifier
+annotation class NamedLuckyNumber
+
+@Qualifier
+annotation class NamedFortuneText
