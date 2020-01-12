@@ -20,6 +20,8 @@ interface HomeSecondSubComponent {
     interface Factory {
         fun create(homeSecondViewModelModule: HomeSecondViewModelModule): HomeSecondSubComponent
     }
+
+    fun inject(homeSecondFragment: HomeSecondFragment)
 }
 
 @Module(subcomponents = [HomeSecondSubComponent::class])

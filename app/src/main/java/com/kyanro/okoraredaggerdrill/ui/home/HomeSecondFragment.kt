@@ -13,11 +13,13 @@ import com.kyanro.okoraredaggerdrill.MyApp
 import com.kyanro.okoraredaggerdrill.R
 import com.kyanro.okoraredaggerdrill.databinding.FragmentHomeSecondBinding
 import com.kyanro.okoraredaggerdrill.ui.home.dagger.HomeSecondViewModelModule
+import javax.inject.Inject
 
 class HomeSecondFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeSecondBinding
-    private lateinit var viewModel: HomeSecondViewModel
+    @Inject
+    lateinit var viewModel: HomeSecondViewModel
 
     private val args: HomeSecondFragmentArgs by navArgs()
     override fun onAttach(context: Context) {
@@ -25,7 +27,7 @@ class HomeSecondFragment : Fragment() {
         val appComponent = (requireActivity().applicationContext as MyApp).appComponent
         val homeSecondSubComponent = appComponent.getHomeSecondSubComponentFactory()
             .create(HomeSecondViewModelModule(this, args))
-        viewModel = homeSecondSubComponent.getHomeSecondViewModel()
+        homeSecondSubComponent.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
