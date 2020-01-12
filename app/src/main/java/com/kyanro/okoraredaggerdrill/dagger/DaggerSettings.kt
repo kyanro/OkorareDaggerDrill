@@ -8,7 +8,7 @@ import dagger.Provides
 import javax.inject.Scope
 
 @AppScope
-@Component(modules = [LuckyNumberModule::class, FortuneModule::class])
+@Component(modules = [LuckyNumberModule::class])
 interface AppComponent {
     fun getLuckyNumberTextCreator(): LuckyNumberTextCreator
 
@@ -19,19 +19,7 @@ interface AppComponent {
 class LuckyNumberModule(private val luckyNumber: Int) {
     @AppScope
     @Provides
-    fun provideLuckyNumberTextCreator() =
-        LuckyNumberTextCreator(luckyNumber)
-
-    @AppScope
-    @Provides
     fun provideLuckyNumber() = luckyNumber
-}
-
-@Module
-class FortuneModule {
-    @AppScope
-    @Provides
-    fun provideFortuneTextCreator(luckyNumber: Int) = FortuneTextCreator(luckyNumber)
 }
 
 @Scope

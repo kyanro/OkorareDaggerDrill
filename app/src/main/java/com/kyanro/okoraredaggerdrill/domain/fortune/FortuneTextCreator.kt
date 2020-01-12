@@ -1,6 +1,10 @@
 package com.kyanro.okoraredaggerdrill.domain.fortune
 
-class FortuneTextCreator(private val luckyNumber: Int) {
+import com.kyanro.okoraredaggerdrill.dagger.AppScope
+import javax.inject.Inject
+
+@AppScope
+class FortuneTextCreator @Inject constructor(private val luckyNumber: Int) {
     fun fortuneText(): String {
         val fortune = when (luckyNumber) {
             in 0..99 -> "アゲアゲ！！！"
