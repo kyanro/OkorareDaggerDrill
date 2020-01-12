@@ -28,7 +28,7 @@ class HomeSecondFragment : Fragment() {
 
         val appComponent = (requireActivity().applicationContext as MyApp).appComponent
         val viewModel = ViewModelProvider(
-            this, HomeSecondViewModelFactory(appComponent.getFortuneTextCreator())
+            this, HomeSecondViewModelFactory(appComponent.getFortuneTextCreator(), args)
         ).get(HomeSecondViewModel::class.java)
 
         viewModel.text.observe(viewLifecycleOwner, Observer {

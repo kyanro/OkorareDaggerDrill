@@ -7,18 +7,20 @@ import androidx.lifecycle.ViewModelProvider
 import com.kyanro.okoraredaggerdrill.domain.fortune.FortuneTextCreator
 
 class HomeSecondViewModel(
-    private val fortuneTextCreator: FortuneTextCreator
+    private val fortuneTextCreator: FortuneTextCreator,
+    private val args: HomeSecondFragmentArgs
 ) : ViewModel() {
 
-    private val _text = MutableLiveData<String>(fortuneTextCreator.fortuneText())
+    private val _text = MutableLiveData<String>(fortuneTextCreator.fortuneText(args.tensionBoostEnabled))
     val text: LiveData<String> = _text
 }
 
 @Suppress("UNCHECKED_CAST")
 class HomeSecondViewModelFactory(
-    private val fortuneTextCreator: FortuneTextCreator
+    private val fortuneTextCreator: FortuneTextCreator,
+    private val args: HomeSecondFragmentArgs
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HomeSecondViewModel(fortuneTextCreator) as T
+        return HomeSecondViewModel(fortuneTextCreator, args) as T
     }
 }
