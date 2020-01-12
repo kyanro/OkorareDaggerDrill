@@ -26,7 +26,6 @@ class LuckyNumberModule(private val luckyNumber: Int) {
 
     @AppScope
     @Provides
-    @NamedLuckyNumber
     fun provideLuckyNumber() = luckyNumber
 }
 
@@ -35,7 +34,7 @@ class FortuneModule {
     @AppScope
     @Provides
     @NamedFortuneText
-    fun provideFortuneText(@NamedLuckyNumber luckyNumber: Int): String {
+    fun provideFortuneText(luckyNumber: Int): String {
         val fortune = when (luckyNumber) {
             in 0..99 -> "アゲアゲ！！！"
             in 100..499 -> "アゲ！！"
@@ -51,9 +50,6 @@ annotation class AppScope
 
 @Qualifier
 annotation class NamedLuckyNumberText
-
-@Qualifier
-annotation class NamedLuckyNumber
 
 @Qualifier
 annotation class NamedFortuneText
