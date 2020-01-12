@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         binding.textHome.text = homeText
 
         binding.buttonHome.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToHomeSecondFragment("From HomeFragment")
+            val action = HomeFragmentDirections.actionHomeFragmentToHomeSecondFragment(true)
             NavHostFragment.findNavController(this@HomeFragment).navigate(action)
         }
     }

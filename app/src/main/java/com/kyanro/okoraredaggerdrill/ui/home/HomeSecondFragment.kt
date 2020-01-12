@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.kyanro.okoraredaggerdrill.MyApp
@@ -25,9 +27,14 @@ class HomeSecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val appComponent = (requireActivity().applicationContext as MyApp).appComponent
-        val fortuneText = appComponent.getFortuneTextCreator().fortuneText()
+        val viewModel = ViewModelProvider(
+            this, HomeSecondViewModelFactory(appComponent.getFortuneTextCreator())
+        ).get(HomeSecondViewModel::class.java)
 
-        binding.textviewHomeSecond.text = fortuneText
+        viewModel.text.observe(viewLifecycleOwner, Observer {
+            binding.textviewHomeSecond.text = it
+        })
+
         binding.buttonHomeSecond.setOnClickListener {
             findNavController().navigate(R.id.action_HomeSecondFragment_to_HomeFragment)
         }

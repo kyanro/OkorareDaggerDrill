@@ -25,8 +25,8 @@
             app:destination="@id/navigation_home" />
 
         <argument
-            android:name="myArg"
-            app:argType="string" />
+            android:name="tensionBoostEnabled"
+            app:argType="boolean" />
     </fragment>
 
     <fragment
