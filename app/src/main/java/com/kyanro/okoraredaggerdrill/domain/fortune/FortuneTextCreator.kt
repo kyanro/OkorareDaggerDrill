@@ -1,9 +1,10 @@
 package com.kyanro.okoraredaggerdrill.domain.fortune
 
 import com.kyanro.okoraredaggerdrill.dagger.AppScope
+import com.kyanro.okoraredaggerdrill.dagger.FragmentScope
 import javax.inject.Inject
 
-@AppScope
+@FragmentScope
 class FortuneTextCreator @Inject constructor(private val luckyNumber: Int) {
     fun fortuneText(tensionBoostEnabled: Boolean): String {
         val fortune = if (tensionBoostEnabled) {
