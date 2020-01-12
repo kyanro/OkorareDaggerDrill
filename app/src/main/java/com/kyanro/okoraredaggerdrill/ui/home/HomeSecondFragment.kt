@@ -25,7 +25,7 @@ class HomeSecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val appComponent = (requireActivity().applicationContext as MyApp).appComponent
-        val fortuneText = appComponent.getFortuneText()
+        val fortuneText = appComponent.getFortuneTextCreator().fortuneText()
 
         binding.textviewHomeSecond.text = fortuneText
         binding.buttonHomeSecond.setOnClickListener {

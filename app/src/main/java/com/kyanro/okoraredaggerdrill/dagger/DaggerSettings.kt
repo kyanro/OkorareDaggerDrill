@@ -1,10 +1,10 @@
 package com.kyanro.okoraredaggerdrill.dagger
 
+import com.kyanro.okoraredaggerdrill.domain.fortune.FortuneTextCreator
 import com.kyanro.okoraredaggerdrill.domain.luckynumber.LuckyNumberTextCreator
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import javax.inject.Qualifier
 import javax.inject.Scope
 
 @AppScope
@@ -12,8 +12,7 @@ import javax.inject.Scope
 interface AppComponent {
     fun getLuckyNumberTextCreator(): LuckyNumberTextCreator
 
-    @NamedFortuneText
-    fun getFortuneText(): String
+    fun getFortuneTextCreator(): FortuneTextCreator
 }
 
 @Module
@@ -32,20 +31,8 @@ class LuckyNumberModule(private val luckyNumber: Int) {
 class FortuneModule {
     @AppScope
     @Provides
-    @NamedFortuneText
-    fun provideFortuneText(luckyNumber: Int): String {
-        val fortune = when (luckyNumber) {
-            in 0..99 -> "アゲアゲ！！！"
-            in 100..499 -> "アゲ！！"
-            in 500..899 -> "サゲ！"
-            else -> "サゲサゲ"
-        }
-        return "今日の運勢: $fortune"
-    }
+    fun provideFortuneTextCreator(luckyNumber: Int) = FortuneTextCreator(luckyNumber)
 }
 
 @Scope
 annotation class AppScope
-
-@Qualifier
-annotation class NamedFortuneText

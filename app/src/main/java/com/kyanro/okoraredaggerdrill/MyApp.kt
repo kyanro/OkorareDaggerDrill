@@ -17,6 +17,6 @@ class MyApp : Application() {
             .build()
 
         Log.d("lucky-log", appComponent.getLuckyNumberTextCreator().luckyNumberText())
-        Log.d("lucky-log", appComponent.getFortuneText())
+        Log.d("lucky-log", appComponent.getFortuneTextCreator().fortuneText())
     }
 }
