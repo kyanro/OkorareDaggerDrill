@@ -1,7 +1,9 @@
 package com.kyanro.okoraredaggerdrill.ui.home.dagger
 
 import androidx.lifecycle.ViewModelProvider
+import com.kyanro.okoraredaggerdrill.dagger.FragmentLocalTimeModule
 import com.kyanro.okoraredaggerdrill.dagger.FragmentScope
+import com.kyanro.okoraredaggerdrill.dagger.GreetingModule
 import com.kyanro.okoraredaggerdrill.domain.fortune.FortuneTextCreator
 import com.kyanro.okoraredaggerdrill.ui.home.HomeSecondFragment
 import com.kyanro.okoraredaggerdrill.ui.home.HomeSecondFragmentArgs
@@ -12,13 +14,17 @@ import dagger.Provides
 import dagger.Subcomponent
 
 @FragmentScope
-@Subcomponent(modules = [HomeSecondViewModelModule::class])
+@Subcomponent(modules = [HomeSecondViewModelModule::class, GreetingModule::class, FragmentLocalTimeModule::class])
 interface HomeSecondSubComponent {
     fun getHomeSecondViewModel(): HomeSecondViewModel
 
     @Subcomponent.Factory
     interface Factory {
-        fun create(homeSecondViewModelModule: HomeSecondViewModelModule): HomeSecondSubComponent
+        fun create(
+            homeSecondViewModelModule: HomeSecondViewModelModule,
+            greetingModule: GreetingModule,
+            fragmentLocalTimeModule: FragmentLocalTimeModule
+        ): HomeSecondSubComponent
     }
 
     fun inject(homeSecondFragment: HomeSecondFragment)

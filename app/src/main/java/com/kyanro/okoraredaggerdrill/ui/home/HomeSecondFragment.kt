@@ -11,8 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.kyanro.okoraredaggerdrill.MyApp
 import com.kyanro.okoraredaggerdrill.R
+import com.kyanro.okoraredaggerdrill.dagger.FragmentLocalTimeModule
+import com.kyanro.okoraredaggerdrill.dagger.GreetingModule
 import com.kyanro.okoraredaggerdrill.databinding.FragmentHomeSecondBinding
+import com.kyanro.okoraredaggerdrill.domain.greeting.Greeter
 import com.kyanro.okoraredaggerdrill.ui.home.dagger.HomeSecondViewModelModule
+import java.time.LocalTime
 import javax.inject.Inject
 
 class HomeSecondFragment : Fragment() {
@@ -26,7 +30,11 @@ class HomeSecondFragment : Fragment() {
         super.onAttach(context)
         val appComponent = (requireActivity().applicationContext as MyApp).appComponent
         val homeSecondSubComponent = appComponent.getHomeSecondSubComponentFactory()
-            .create(HomeSecondViewModelModule(this, args))
+            .create(
+                HomeSecondViewModelModule(this, args),
+                GreetingModule(Greeter.GreetingType.CAT),
+                FragmentLocalTimeModule(LocalTime.of(3, 0))
+            )
         homeSecondSubComponent.inject(this)
     }
 

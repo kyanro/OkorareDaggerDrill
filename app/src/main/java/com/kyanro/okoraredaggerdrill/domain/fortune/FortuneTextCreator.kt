@@ -1,11 +1,11 @@
 package com.kyanro.okoraredaggerdrill.domain.fortune
 
-import com.kyanro.okoraredaggerdrill.dagger.AppScope
 import com.kyanro.okoraredaggerdrill.dagger.FragmentScope
+import com.kyanro.okoraredaggerdrill.domain.greeting.Greeter
 import javax.inject.Inject
 
 @FragmentScope
-class FortuneTextCreator @Inject constructor(private val luckyNumber: Int) {
+class FortuneTextCreator @Inject constructor(private val luckyNumber: Int, private val greeter: Greeter) {
     fun fortuneText(tensionBoostEnabled: Boolean): String {
         val fortune = if (tensionBoostEnabled) {
             when (luckyNumber) {
@@ -21,6 +21,6 @@ class FortuneTextCreator @Inject constructor(private val luckyNumber: Int) {
                 else -> "サゲサゲ"
             }
         }
-        return "今日の運勢: $fortune"
+        return "${greeter.greeting()}\n今日の運勢: $fortune"
     }
 }
