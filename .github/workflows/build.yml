@@ -21,5 +21,5 @@ jobs:
         with:
           path: ~/.gradle
           key: ${{ runner.os }}-${{ hashFiles('build.gradle') }}-${{ hashFiles('app/build.gradle') }}
-      - name: Build with Gradle
-        run: ./gradlew buildDebug
+      - name: Local Unit Test for Debug with Gradle
+        run: ./gradlew testDebug
