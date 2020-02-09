@@ -1,7 +1,6 @@
 package com.kyanro.okoraredaggerdrill.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.kyanro.okoraredaggerdrill.MyApp
-import com.kyanro.okoraredaggerdrill.dagger.DaggerAppComponent
 import com.kyanro.okoraredaggerdrill.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -21,10 +19,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-
-        val appComponent = DaggerAppComponent.create()
-        Log.d("lucky-log", appComponent.getLuckyNumberText())
-        Log.d("lucky-log", appComponent.getLuckyNumberText())
 
         return binding.root
     }
