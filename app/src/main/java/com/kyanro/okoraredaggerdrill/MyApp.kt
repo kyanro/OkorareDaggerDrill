@@ -20,5 +20,6 @@ class MyApp : Application() {
             .build()
 
         Log.d("lucky-log", appComponent.getLuckyNumberText())
+        Log.d("lucky-log", appComponent.getFortuneText())
     }
 }
