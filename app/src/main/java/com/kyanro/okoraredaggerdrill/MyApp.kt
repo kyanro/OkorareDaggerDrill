@@ -1,6 +1,7 @@
 package com.kyanro.okoraredaggerdrill
 
 import android.app.Application
+import android.util.Log
 import com.kyanro.okoraredaggerdrill.dagger.AppComponent
 import com.kyanro.okoraredaggerdrill.dagger.DaggerAppComponent
 import com.kyanro.okoraredaggerdrill.dagger.LuckyNumberModule
@@ -14,5 +15,7 @@ class MyApp : Application() {
         appComponent = DaggerAppComponent.builder()
             .luckyNumberModule(luckyNumberModule)
             .build()
+
+        Log.d("lucky-log", appComponent.getLuckyNumberText())
     }
 }
